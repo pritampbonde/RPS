@@ -1,0 +1,26 @@
+import unittest
+from RPS import player
+
+class TestRPSPlayer(unittest.TestCase):
+    def test_player_first_game(self):
+        # Test the player function for the first game with no previous play
+        move = player("", [])
+        self.assertIn(move, ["R", "P", "S"])  # Assert that the move is valid
+
+    def test_player_subsequent_games(self):
+        # Test the player function for subsequent games with previous plays
+        prev_play = "R"
+        opponent_history = ["S", "P", "R", "R"]
+        move = player(prev_play, opponent_history)
+        self.assertIn(move, ["R", "P", "S"])  # Assert that the move is valid
+
+    def test_player_strategy(self):
+        # Test if the player function follows a specific strategy
+        prev_play = "R"
+        opponent_history = ["S", "P", "R", "R"]
+        move = player(prev_play, opponent_history)
+        # Assert specific moves based on strategy (e.g., if opponent plays R, player should play P)
+        self.assertEqual(move, "P")
+
+if __name__ == '__main__':
+    unittest.main()
